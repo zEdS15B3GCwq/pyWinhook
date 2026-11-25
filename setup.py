@@ -37,7 +37,10 @@ setup(name='pyWinhook',
       long_description = ' '.join(doclines[2:]),
       packages = ['pyWinhook'],
       install_requires = ['pywin32'],
-      ext_modules = [Extension('pyWinhook._cpyHook', ['pyWinhook/cpyHook.i'], libraries=libs)],
+      ext_modules = [Extension('pyWinhook._cpyHook', ['pyWinhook/cpyHook.i'], libraries=libs,
+                               py_limited_api=True,
+                               define_macros=[('Py_LIMITED_API', '0x030B0000')])],
+      options = {'bdist_wheel': {'py_limited_api': 'cp311'}},
       data_files = [('Lib/site-packages/pyWinhook', ['pyWinhook/cpyHook.py', 'LICENSE.txt', 'README.txt', 'CHANGELOG.txt'])],
       keywords = 'hook win32 win64 keyboard input user control'
       )
